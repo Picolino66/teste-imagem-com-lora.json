@@ -22,3 +22,5 @@ RUN comfy model download --url https://huggingface.co/SeeSee21/Z-Image-Turbo-AIO
 RUN wget -O /comfyui/models/loras/RealisticSnapshot-Zimage-Turbov5.safetensors https://huggingface.co/idan054/sxrxa/resolve/5cd5b3afd79b8e908d146a79b798c0f484877181/RealisticSnapshot-Zimage-Turbov5.safetensors?download=true
 # copy all input data (like images or videos) into comfyui (uncomment and adjust if needed)
 # COPY input/ /comfyui/input/
+# comando que mantém o worker ativo
+CMD ["/start.sh"]
