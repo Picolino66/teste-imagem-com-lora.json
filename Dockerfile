@@ -11,20 +11,16 @@ COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
 # Baixa modelos do novo workflow
-RUN comfy model download \
-    --url https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/text_encoders/qwen_3_4b.safetensors \
-    --relative-path models/text_encoders \
-    --filename qwen_3_4b.safetensors
+RUN mkdir -p /comfyui/models/text_encoders /comfyui/models/vae /comfyui/models/diffusion_models
 
-RUN comfy model download \
-    --url https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors \
-    --relative-path models/vae \
-    --filename ae.safetensors
+RUN wget -O /comfyui/models/text_encoders/qwen_3_4b.safetensors \
+    https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/text_encoders/qwen_3_4b.safetensors
 
-RUN comfy model download \
-    --url https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors \
-    --relative-path models/diffusion_models \
-    --filename z_image_turbo_bf16.safetensors
+RUN wget -O /comfyui/models/vae/ae.safetensors \
+    https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors
+
+RUN wget -O /comfyui/models/diffusion_models/z_image_turbo_bf16.safetensors \
+    https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors
 
 # Expor porta correta para runpod
 ENV PORT=80
