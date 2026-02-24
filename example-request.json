@@ -1,0 +1,275 @@
+{
+  "input": {
+    "workflow": {
+      "2": {
+        "inputs": {
+          "value": 3,
+          "model": [
+            "41",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingAuraFlow",
+        "_meta": {
+          "title": "ModelSamplingAuraFlow"
+        }
+      },
+      "6": {
+        "inputs": {
+          "value": 1152
+        },
+        "class_type": "EmptyLatentImage",
+        "_meta": {
+          "title": "EmptyLatentImage"
+        }
+      },
+      "11": {
+        "inputs": {
+          "samples": [
+            "17",
+            0
+          ],
+          "vae": [
+            "30",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "12": {
+        "inputs": {
+          "samples": [
+            "14",
+            0
+          ],
+          "vae": [
+            "31",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "13": {
+        "inputs": {
+          "value": [
+            {
+              "name": "A",
+              "selected": true,
+              "url": "/api/view?filename=rgthree.compare._temp_kpoys_00017_.png&type=temp&subfolder=&rand=0.31799399653067717"
+            },
+            {
+              "name": "B",
+              "selected": true,
+              "url": "/api/view?filename=rgthree.compare._temp_kpoys_00018_.png&type=temp&subfolder=&rand=0.383780291927299"
+            }
+          ],
+          "image_a": [
+            "11",
+            0
+          ],
+          "image_b": [
+            "12",
+            0
+          ]
+        },
+        "class_type": "Image Comparer (rgthree)",
+        "_meta": {
+          "title": "🔍 Compare: Base vs Upscaled"
+        }
+      },
+      "14": {
+        "inputs": {
+          "seed": 147055680729376,
+          "steps": 3,
+          "cfg": 1,
+          "sampler_name": "res_multistep",
+          "scheduler": "simple",
+          "denoise": 0.55,
+          "model": [
+            "2",
+            0
+          ],
+          "positive": [
+            "20",
+            0
+          ],
+          "negative": [
+            "40",
+            0
+          ],
+          "latent_image": [
+            "16",
+            0
+          ]
+        },
+        "class_type": "KSampler",
+        "_meta": {
+          "title": "✨ Hires Fix Refinement"
+        }
+      },
+      "16": {
+        "inputs": {
+          "text": "nearest-exact",
+          "samples": [
+            "17",
+            0
+          ]
+        },
+        "class_type": "LatentUpscaleBy",
+        "_meta": {
+          "title": "LatentUpscaleBy"
+        }
+      },
+      "17": {
+        "inputs": {
+          "seed": 322571269041708,
+          "steps": 9,
+          "cfg": 1,
+          "sampler_name": "res_multistep",
+          "scheduler": "simple",
+          "denoise": 1,
+          "model": [
+            "2",
+            0
+          ],
+          "positive": [
+            "20",
+            0
+          ],
+          "negative": [
+            "40",
+            0
+          ],
+          "latent_image": [
+            "6",
+            0
+          ]
+        },
+        "class_type": "KSampler",
+        "_meta": {
+          "title": "🎨 Base Generation"
+        }
+      },
+      "20": {
+        "inputs": {
+          "text": "A realistic, high-quality photo of a young woman standing indoors in a modern, minimalist bedroom. She is wearing a red Manchester United football jersey with white stripes on the shoulders and a Snapdragon sponsor logo on the front, paired with black athletic shorts.\n\nShe has long, wavy brown hair, soft natural makeup, light freckles on her face, and a calm, confident expression while looking directly at the camera. Her posture is relaxed and natural.\n\nThe room features warm lighting, neutral tones, a neatly made bed, modern wall panels, curtains, and a mounted TV, creating a cozy yet elegant atmosphere.\n\nPhotorealistic style, ultra-detailed, sharp focus, natural skin texture, soft indoor lighting, shallow depth of field, high resolution, DSLR photography look, 35mm lens, f/1.8.",
+          "clip": [
+            "41",
+            1
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "✅ Positive Prompt (What You Want)"
+        }
+      },
+      "26": {
+        "inputs": {
+          "filename_prefix": "Z-Image-L",
+          "images": [
+            "11",
+            0
+          ]
+        },
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "💾 Save Base Image"
+        }
+      },
+      "27": {
+        "inputs": {
+          "filename_prefix": "Z-Image-H",
+          "images": [
+            "12",
+            0
+          ]
+        },
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "💾 Save Upscaled Image"
+        }
+      },
+      "28": {
+        "inputs": {},
+        "class_type": "Fast Groups Bypasser (rgthree)",
+        "_meta": {
+          "title": "🔼 Toggle Upscaler ON/OFF"
+        }
+      },
+      "29": {
+        "inputs": {},
+        "class_type": "Reroute",
+        "_meta": {
+          "title": "Reroute"
+        }
+      },
+      "30": {
+        "inputs": {},
+        "class_type": "Reroute",
+        "_meta": {
+          "title": "Reroute"
+        }
+      },
+      "31": {
+        "inputs": {},
+        "class_type": "Reroute",
+        "_meta": {
+          "title": "Reroute"
+        }
+      },
+      "34": {
+        "inputs": {
+          "ckpt_name": "z-image-turbo-fp8-aio.safetensors"
+        },
+        "class_type": "CheckpointLoaderSimple",
+        "_meta": {
+          "title": "CheckpointLoaderSimple"
+        }
+      },
+      "40": {
+        "inputs": {
+          "conditioning": [
+            "20",
+            0
+          ]
+        },
+        "class_type": "ConditioningZeroOut",
+        "_meta": {
+          "title": "ConditioningZeroOut"
+        }
+      },
+      "41": {
+        "inputs": {
+          "lora_name": "RealisticSnapshot-Zimage-Turbov5.safetensors",
+          "strength_model": 1,
+          "strength_clip": 1,
+          "model": [
+            "34",
+            0
+          ],
+          "clip": [
+            "34",
+            1
+          ]
+        },
+        "class_type": "LoraLoader",
+        "_meta": {
+          "title": "LoraLoader"
+        }
+      },
+      "43": {
+        "inputs": {},
+        "class_type": "Fast Groups Bypasser (rgthree)",
+        "_meta": {
+          "title": "📖 Toggle LoRA  ON/OFF"
+        }
+      }
+    }
+  }
+}
