@@ -7,6 +7,8 @@ RUN python3 -m pip install --upgrade pip && \
     pip install fastapi uvicorn[standard] pydantic
 
 COPY app /app
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 # Baixa modelo e lora
 RUN comfy model download \
@@ -21,4 +23,4 @@ RUN wget -O /comfyui/models/loras/RealisticSnapshot-Zimage-Turbov5.safetensors \
 ENV PORT=80
 EXPOSE 80
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["/start.sh"]
