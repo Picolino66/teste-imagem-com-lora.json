@@ -23,5 +23,11 @@ def run_comfy_workflow(workflow: dict):
             # se a saída não for JSON, devolve como texto
             return {"output": result.stdout}
     except subprocess.CalledProcessError as e:
-        # devolve mensagem de erro da CLI
-        raise HTTPException(status_code=500, detail=e.stderr)
+        # devolve mensagem de erro da CLI com fallback para stdout
+        stderr = (e.stderr or "").strip()
+        stdout = (e.stdout or "").strip()
+        detail = stderr or stdout or str(e)
+        raise HTTPException(
+            status_code=500,
+            detail={"message": detail, "returncode": e.returncode},
+        )
