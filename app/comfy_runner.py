@@ -10,7 +10,7 @@ def run_comfy_workflow(workflow: dict):
         json.dump(workflow, f)
 
     # comando que executa o workflow
-    cmd = ["comfy", "run", filename]
+    cmd = ["comfy", "run", "--workflow", filename]
     
     try:
         # roda o comando e captura stdout
