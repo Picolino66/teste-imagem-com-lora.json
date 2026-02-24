@@ -72,16 +72,18 @@ async function onSend() {
 
     payload.response_format = "base64";
 
-    setStatus("Enviando requisição para /generate...");
+    setStatus("Enviando requisição para /api/generate (proxy local)...");
 
-    const generateUrl = endpoint.endsWith("/generate") ? endpoint : `${endpoint}/generate`;
-    const response = await fetch(generateUrl, {
+    const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${runpodApiKey}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({
+        endpoint,
+        runpod_api_key: runpodApiKey,
+        payload
+      })
     });
 
     const body = await response.json().catch(() => ({}));
@@ -100,9 +102,7 @@ async function onSend() {
     setStatus("Imagem recebida e renderizada com sucesso.");
   } catch (error) {
     if (error instanceof TypeError) {
-      setStatus(
-        "Erro de rede/CORS. O endpoint precisa permitir sua origem no preflight OPTIONS (Access-Control-Allow-Origin, Methods e Headers)."
-      );
+      setStatus("Erro de rede ao acessar o proxy local. Verifique se o server.py está em execução na mesma origem.");
       return;
     }
     setStatus(`Erro: ${error.message}`);
