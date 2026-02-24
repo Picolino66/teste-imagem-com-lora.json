@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Runpod Workflow Tester</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="layout">
+    <section class="panel">
+      <h1>Runpod Workflow Tester</h1>
+      <p class="sub">Preencha os dados, envie para <code>/generate</code> e veja a imagem retornada.</p>
+
+      <label for="endpoint">Endpoint Base URL</label>
+      <input id="endpoint" type="text" placeholder="https://SEU_ENDPOINT.api.runpod.ai" />
+
+      <label for="runpodApiKey">RUNPOD_API_KEY</label>
+      <input id="runpodApiKey" type="password" placeholder="Cole aqui sua RUNPOD_API_KEY" />
+
+      <label for="promptNodeId">Prompt Node ID (opcional)</label>
+      <input id="promptNodeId" type="text" value="83:27" placeholder="Ex.: 83:27" />
+
+      <label for="prompt">Prompt</label>
+      <textarea id="prompt" rows="5" placeholder="Digite o prompt aqui..."></textarea>
+
+      <label for="workflow">Workflow API JSON</label>
+      <textarea id="workflow" rows="14" placeholder='Cole aqui o teste1-api.json (formato {"workflow": {...}})'></textarea>
+
+      <button id="sendBtn" type="button">Enviar</button>
+      <pre id="status" class="status">Aguardando envio...</pre>
+    </section>
+
+    <section class="panel result-panel">
+      <h2>Imagem</h2>
+      <img id="resultImage" alt="Resultado da geração" />
+      <p id="resultMeta" class="meta"></p>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
