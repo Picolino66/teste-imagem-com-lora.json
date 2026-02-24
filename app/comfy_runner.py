@@ -19,8 +19,6 @@ def run_comfy_workflow(workflow: dict):
 
     try:
         result = subprocess.run(cmd, check=True, capture_output=True, text=True)
-        # Leitura da saída (pode ser adaptada para imagem base64)
-        with open(cmd[-1], "r") as out:
-            return json.load(out)
+        return json.loads(result.stdout)
     except subprocess.CalledProcessError as e:
         raise HTTPException(status_code=500, detail=e.stderr)
