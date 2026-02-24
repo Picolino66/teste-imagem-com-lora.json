@@ -72,3 +72,16 @@ def run_comfy_workflow(workflow: dict, request_id: str = "no-request-id"):
             status_code=500,
             detail={"message": detail, "returncode": e.returncode},
         )
+    except FileNotFoundError as e:
+        logger.error(
+            "request_id=%s binario ausente para executar workflow: %s",
+            request_id,
+            str(e),
+        )
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "message": "Binario do Comfy nao encontrado no container.",
+                "error": str(e),
+            },
+        )

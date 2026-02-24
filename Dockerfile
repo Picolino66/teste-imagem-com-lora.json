@@ -1,4 +1,4 @@
-FROM runpod/comfyui:latest
+FROM runpod/worker-comfyui:5.6.0-base
 
 WORKDIR /app
 
