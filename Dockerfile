@@ -13,7 +13,7 @@ RUN chmod +x /start.sh
 # Baixa modelo e lora
 RUN comfy model download \
     --url https://huggingface.co/SeeSee21/Z-Image-Turbo-AIO/resolve/main/z-image-turbo-fp8-aio.safetensors \
-    --relative-path models/diffusion_models \
+    --relative-path models/checkpoints \
     --filename z-image-turbo-fp8-aio.safetensors
 
 RUN wget -O /comfyui/models/loras/RealisticSnapshot-Zimage-Turbov5.safetensors \
