@@ -1,4 +1,4 @@
-FROM runpod/worker-comfyui:5.5.1-base
+FROM runpod/worker-comfyui:latest
 
 WORKDIR /app
 
@@ -10,14 +10,21 @@ COPY app /app
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
-# Baixa modelo e lora
+# Baixa modelos do novo workflow
 RUN comfy model download \
-    --url https://huggingface.co/SeeSee21/Z-Image-Turbo-AIO/resolve/main/z-image-turbo-fp8-aio.safetensors \
-    --relative-path models/checkpoints \
-    --filename z-image-turbo-fp8-aio.safetensors
+    --url https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/text_encoders/qwen_3_4b.safetensors \
+    --relative-path models/text_encoders \
+    --filename qwen_3_4b.safetensors
 
-RUN wget -O /comfyui/models/loras/RealisticSnapshot-Zimage-Turbov5.safetensors \
-    https://huggingface.co/idan054/sxrxa/resolve/main/RealisticSnapshot-Zimage-Turbov5.safetensors
+RUN comfy model download \
+    --url https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors \
+    --relative-path models/vae \
+    --filename ae.safetensors
+
+RUN comfy model download \
+    --url https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors \
+    --relative-path models/diffusion_models \
+    --filename z_image_turbo_bf16.safetensors
 
 # Expor porta correta para runpod
 ENV PORT=80
